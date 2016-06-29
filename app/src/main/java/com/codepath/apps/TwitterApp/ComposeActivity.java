@@ -1,14 +1,18 @@
 package com.codepath.apps.TwitterApp;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -41,6 +45,31 @@ public class ComposeActivity extends AppCompatActivity {
                 user = User.fromJSON(response);
                 addProfileImage(user);
 
+            }
+        });
+
+        final EditText etText = (EditText) findViewById(R.id.etText);
+        final TextView tvCharCount = (TextView) findViewById(R.id.tvCharCount);
+        etText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String tweetText = etText.getText().toString();
+                int tweetLength = 140 - tweetText.length();
+                tvCharCount.setText(Integer.toString(tweetLength));
+                if (tweetLength <= 0) {
+                    tvCharCount.setTextColor( Color.parseColor("#E54648"));
+                }
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count,
+                                          int after) {
+                // Fires right before text is changing
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                // Fires right after the text has changed
             }
         });
 
