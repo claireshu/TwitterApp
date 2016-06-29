@@ -3,13 +3,19 @@ package com.codepath.apps.TwitterApp.models;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.parceler.Parcel;
 
 import java.util.ArrayList;
 
 /**
  * Created by claireshu on 6/27/16.
  */
+@Parcel
 public class Tweet {
+
+    public Tweet() {
+    }
+
     public String getBody() {
         return body;
     }
@@ -31,6 +37,7 @@ public class Tweet {
     private long uid; // unique id for the tweet
     private User user; // store embedded user obj
     private String createdAt;
+//    private String userName;
 
     // Deserialize the JSON and build tweet objects
     // Tweet.fromJSON("(...)") -> Tweet
@@ -50,6 +57,18 @@ public class Tweet {
         // return the tweet object
         return tweet;
     }
+
+//    public static Tweet createTweet(String body, String createdAt, String user) {
+//        Tweet tweet = new Tweet();
+//
+//        tweet.body = body;
+//        tweet.createdAt = createdAt;
+//        tweet.userName = user;
+//
+//        // return the tweet object
+//        return tweet;
+//
+//    }
 
     //Tweet.fromJSONArray([{...}, {..}]) -> List<Tweet>
     public static ArrayList<Tweet> fromJSONArray(JSONArray jsonArray) {

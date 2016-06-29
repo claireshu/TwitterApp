@@ -8,14 +8,15 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.codepath.apps.TwitterApp.fragments.UserTimelineFragment;
 import com.codepath.apps.TwitterApp.models.User;
 import com.loopj.android.http.JsonHttpResponseHandler;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.Header;
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 public class ProfileActivity extends AppCompatActivity {
     TwitterClient client;
@@ -24,22 +25,21 @@ public class ProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile2);
+        setContentView(R.layout.activity_profile);
+
+        String screenName = getIntent().getStringExtra("screen_name");
 
         client = TwitterApplication.getRestClient();
-        client.getUserInfo(new JsonHttpResponseHandler() {
+        client.getUserInfo(screenName, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 user = User.fromJSON(response);
                 // my current user accounts information
                 getSupportActionBar().setTitle("@" + user.getScreenName());
-               // getSupportActionBar().setTitle("shuclaire_");
                 populateProfileHeader(user);
             }
         });
 
-
-        String screenName = getIntent().getStringExtra("screen_name");
         if (savedInstanceState == null) {
             UserTimelineFragment fragmentUserTimeline = UserTimelineFragment.newInstance(screenName);
             // display user timeline fragment within this activity dynamically
@@ -60,7 +60,9 @@ public class ProfileActivity extends AppCompatActivity {
         tvTagline.setText(user.getTagline());
         tvFollowers.setText(user.getFollowersCount() + "Followers");
         tvFollowing.setText(user.getFriendsCount() + "Following");
-        Picasso.with(this).load(user.getProfileImageUrl()).into(ivProfileImage);
+        Glide.with(this).load(user.getProfileImageUrl())
+                .bitmapTransform(new RoundedCornersTransformation(getApplicationContext(), 4, 4))
+                .into(ivProfileImage);
 
 
     }

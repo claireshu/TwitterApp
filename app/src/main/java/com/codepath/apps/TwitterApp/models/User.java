@@ -2,11 +2,19 @@ package com.codepath.apps.TwitterApp.models;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.parceler.Parcel;
 
 /**
  * Created by claireshu on 6/27/16.
  */
+
+@Parcel
 public class User {
+
+    public User() {
+
+    }
+
     // list attributes
     public String getName() {
         return name;
@@ -36,6 +44,10 @@ public class User {
         return followingsCount;
     }
 
+    public String getDate() {
+        return date;
+    }
+
     private String name;
     private long uid;
     private String screenName;
@@ -43,6 +55,7 @@ public class User {
     private String tagline;
     private int followersCount;
     private int followingsCount;
+    private String date;
 
     //deserialize the user json -> user
     public static User fromJSON(JSONObject json) {
@@ -56,6 +69,7 @@ public class User {
             u.tagline = json.getString("description");
             u.followersCount = json.getInt("followers_count");
             u.followingsCount = json.getInt("friends_count");
+            u.date = json.getString("created_at");
         } catch (JSONException e) {
             e.printStackTrace();
         }
