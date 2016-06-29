@@ -9,11 +9,14 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.codepath.apps.TwitterApp.ProfileActivity;
 import com.codepath.apps.TwitterApp.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
+
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 /**
  * Created by claireshu on 6/27/16.
@@ -41,13 +44,25 @@ public class TweetsArrayAdapter extends ArrayAdapter<Tweet> {
         TextView tvUserName = (TextView) convertView.findViewById(R.id.tvUserName);
         TextView tvBody = (TextView) convertView.findViewById(R.id.tvBody);
         TextView tvTimestamp = (TextView) convertView.findViewById(R.id.tvTimestamp);
+        ImageView ivTweetPhoto = (ImageView) convertView.findViewById(R.id.ivTweetPhoto);
+
+//        if (tweet.getMediaUrl() == null) {
+//            ivTweetPhoto.setAdjustViewBounds(true);
+//            ivTweetPhoto.setMaxHeight(0);
+//        }
 
         // populate data into the subview
         tvUserName.setText(tweet.getUser().getScreenName());
         tvBody.setText(tweet.getBody());
+        tvTimestamp.setText(ParseRelativeDate.getRelativeTimeAgo(tweet.getCreatedAt()));
+
+        Glide.with(getContext()).load(tweet.getMediaUrl())
+                .bitmapTransform(new RoundedCornersTransformation(getContext(), 4, 4))
+                .into(ivTweetPhoto);
+
+
         ivProfileImage.setImageResource(android.R.color.transparent);
         ivProfileImage.setTag(tweet.getUser().getScreenName());
-        tvTimestamp.setText(ParseRelativeDate.getRelativeTimeAgo(tweet.getCreatedAt()));
 //        Glide.with(getContext()).load(tweet.getUser().getProfileImageUrl())
 //                .bitmapTransform(new RoundedCornersTransformation(getContext(), 4, 4))
 //                .into(ivProfileImage);

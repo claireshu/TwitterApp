@@ -46,7 +46,11 @@
         <activity
             android:name=".ProfileActivity"
             android:label="@string/title_activity_profile" />
-        <activity android:name=".ComposeActivity" android:parentActivityName=".TimelineActivity"/>
+        <activity
+            android:name=".ComposeActivity"
+            android:parentActivityName=".TimelineActivity" />
+        <activity android:name=".SearchActivity"
+            android:parentActivityName=".TimelineActivity" />
     </application>
 
 </manifest>

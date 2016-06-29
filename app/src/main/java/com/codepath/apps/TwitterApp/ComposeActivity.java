@@ -10,6 +10,7 @@ import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -48,6 +49,7 @@ public class ComposeActivity extends AppCompatActivity {
             }
         });
 
+        final Button btnTweet = (Button) findViewById(R.id.btnTweet);
         final EditText etText = (EditText) findViewById(R.id.etText);
         final TextView tvCharCount = (TextView) findViewById(R.id.tvCharCount);
         etText.addTextChangedListener(new TextWatcher() {
@@ -58,6 +60,9 @@ public class ComposeActivity extends AppCompatActivity {
                 tvCharCount.setText(Integer.toString(tweetLength));
                 if (tweetLength <= 0) {
                     tvCharCount.setTextColor( Color.parseColor("#E54648"));
+                    btnTweet.setEnabled(false);
+                } else {
+                    btnTweet.setEnabled(true);
                 }
             }
 

@@ -32,12 +32,16 @@ public class Tweet {
         return user;
     }
 
+    public String getMediaUrl() {
+        return mediaUrl;
+    }
+
     // list out the attributes
     private String body;
     private long uid; // unique id for the tweet
     private User user; // store embedded user obj
     private String createdAt;
-//    private String userName;
+    private String mediaUrl;
 
     // Deserialize the JSON and build tweet objects
     // Tweet.fromJSON("(...)") -> Tweet
@@ -50,6 +54,9 @@ public class Tweet {
             tweet.uid = jsonObject.getLong("id");
             tweet.createdAt = jsonObject.getString("created_at");
             tweet.user = User.fromJSON(jsonObject.getJSONObject("user"));
+            JSONArray media = jsonObject.getJSONObject("entities").getJSONArray("media");
+            JSONObject mediaObj = (JSONObject) media.get(0);
+            tweet.mediaUrl = mediaObj.optString("media_url");
         } catch (JSONException e) {
             e.printStackTrace();
         }

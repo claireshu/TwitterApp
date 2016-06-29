@@ -5,7 +5,6 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.codepath.apps.TwitterApp.TwitterApplication;
-import com.codepath.apps.TwitterApp.TwitterClient;
 import com.codepath.apps.TwitterApp.models.Tweet;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
@@ -18,7 +17,6 @@ import cz.msebera.android.httpclient.Header;
  * Created by claireshu on 6/27/16.
  */
 public class MentionsTimelineFragment extends TweetsListFragment{
-    private TwitterClient client;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

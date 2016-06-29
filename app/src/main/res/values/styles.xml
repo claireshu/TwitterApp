@@ -46,6 +46,8 @@
         <!-- Support library compatibility -->
         <item name="actionBarStyle">@style/MyActionBar</item>
         <item name="actionBarTabTextStyle">@style/MyActionBarTabText</item>
+        <item name="android:actionMenuTextColor">#ff0000</item>
+        <item name="actionMenuTextColor">#ff0000</item>
     </style>
 
     <style name="MyActionBar" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
@@ -55,15 +57,21 @@
         <!-- Support library compatibility -->
         <item name="background">@color/colorPrimary</item>
         <item name="titleTextStyle">@style/MyActionBar.TitleTextStyle</item>
+        <item name="android:actionMenuTextColor">#ff0000</item>
+        <item name="actionMenuTextColor">#ff0000</item>
     </style>
 
     <style name="MyActionBar.TitleTextStyle"
         parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
         <item name="android:textColor">@color/twitterColor</item>
+        <item name="android:actionMenuTextColor">#ff0000</item>
+        <item name="actionMenuTextColor">#ff0000</item>
     </style>
 
     <style name="MyActionBarTabText" parent="@style/Widget.AppCompat.ActionBar.TabText">
         <item name="android:textColor">@color/twitterColor</item>
+        <item name="android:actionMenuTextColor">#ff0000</item>
+        <item name="actionMenuTextColor">#ff0000</item>
     </style>
 
 

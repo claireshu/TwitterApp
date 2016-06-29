@@ -1,19 +1,22 @@
 package com.codepath.apps.TwitterApp;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.astuetz.PagerSlidingTabStrip;
 import com.codepath.apps.TwitterApp.fragments.HomeTimelineFragment;
 import com.codepath.apps.TwitterApp.fragments.MentionsTimelineFragment;
+import com.codepath.apps.TwitterApp.fragments.SearchTimelineFragment;
 import com.codepath.apps.TwitterApp.models.Tweet;
 
 import org.parceler.Parcels;
@@ -21,6 +24,7 @@ import org.parceler.Parcels;
 public class TimelineActivity extends AppCompatActivity {
     HomeTimelineFragment hTimelineFragment;
     MentionsTimelineFragment mTimelineFragment;
+    SearchTimelineFragment sTimelineFragment;
     Tweet tweet;
 
     @Override
@@ -35,12 +39,23 @@ public class TimelineActivity extends AppCompatActivity {
 
         hTimelineFragment = new HomeTimelineFragment();
         mTimelineFragment = new MentionsTimelineFragment();
+        sTimelineFragment = new SearchTimelineFragment();
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_timeline, menu);
+
+        for(int i = 0; i < menu.size(); i++){
+            Drawable drawable = menu.getItem(i).getIcon();
+            if(drawable != null) {
+                drawable.mutate();
+                //drawable.setColorFilter(Color.parseColor("#55ACEE"), PorterDuff.Mode.SRC_ATOP);
+                drawable.setColorFilter(Color.parseColor("#55ACEE"), PorterDuff.Mode.SRC_IN);
+
+            }
+        }
         return true;
     }
 
@@ -54,6 +69,10 @@ public class TimelineActivity extends AppCompatActivity {
 
         if (id == R.id.miTweet) {
             onComposeTweet(item);
+        }
+
+        if (id == R.id.miSearch) {
+            onSearchTweet(item);
         }
         return super.onOptionsItemSelected(item);
     }
@@ -104,6 +123,11 @@ public class TimelineActivity extends AppCompatActivity {
         startActivityForResult(i, REQUEST_CODE);
     }
 
+    public void onSearchTweet(MenuItem mi) {
+        Intent i = new Intent(this, SearchActivity.class);
+        startActivity(i);
+
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
