@@ -108,7 +108,6 @@ public class TimelineActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
             tweet = (Tweet) Parcels.unwrap(data.getParcelableExtra("tweet"));
-            Log.d("TWEET", tweet.getUser().getName());
             hTimelineFragment.addTweetStart(tweet);
         } else {
             // error handling

@@ -81,11 +81,11 @@ public class ComposeActivity extends AppCompatActivity {
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 Toast.makeText(getApplicationContext(), "Tweet Posted", Toast.LENGTH_SHORT).show();
                 newTweet = Tweet.fromJSON(response);
+                Intent i = new Intent();
+                i.putExtra("tweet", Parcels.wrap(newTweet));
+                setResult(RESULT_OK, i);
+                finish();
             }
         });
-        Intent i = new Intent();
-        i.putExtra("tweet", Parcels.wrap(newTweet));
-        setResult(RESULT_OK, i);
-        finish();
     }
 }
