@@ -94,4 +94,28 @@
         android:paddingBottom="5dp"
         android:layout_below="@+id/ivTweetPhoto" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvRetweetCount"
+        android:layout_below="@+id/ivTweetPhoto"
+        android:paddingTop="6dp"
+        android:paddingLeft="6dp"
+        android:textColor="@color/twitterGray"
+        android:paddingBottom="5dp"
+        android:textSize="12dp"
+        android:layout_toRightOf="@+id/ivRetweet" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvFavoritesCount"
+        android:layout_below="@+id/ivTweetPhoto"
+        android:paddingTop="6dp"
+        android:paddingLeft="3dp"
+        android:textColor="@color/twitterGray"
+        android:paddingBottom="5dp"
+        android:textSize="12dp"
+        android:layout_toRightOf="@+id/ivFavorite" />
+
 </RelativeLayout>

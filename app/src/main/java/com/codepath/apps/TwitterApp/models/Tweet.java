@@ -52,6 +52,14 @@ public class Tweet {
         this.retweeted = retweeted;
     }
 
+    public int getFavoriteCount() {
+        return favoriteCount;
+    }
+
+    public int getRetweetCount() {
+        return retweetCount;
+    }
+
     // list out the attributes
     private String body;
     private long uid; // unique id for the tweet
@@ -60,6 +68,8 @@ public class Tweet {
     private String mediaUrl;
     private boolean favorited;
     private boolean retweeted;
+    private int favoriteCount;
+    private int retweetCount;
 
     // Deserialize the JSON and build tweet objects
     // Tweet.fromJSON("(...)") -> Tweet
@@ -81,6 +91,8 @@ public class Tweet {
             }
             tweet.favorited = jsonObject.getBoolean("favorited");
             tweet.retweeted = jsonObject.getBoolean("retweeted");
+            tweet.favoriteCount = jsonObject.optInt("favorite_count");
+            tweet.retweetCount = jsonObject.optInt("retweet_count");
         } catch (JSONException e) {
             e.printStackTrace();
         }

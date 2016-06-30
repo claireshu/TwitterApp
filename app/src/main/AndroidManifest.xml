@@ -49,7 +49,11 @@
         <activity
             android:name=".ComposeActivity"
             android:parentActivityName=".TimelineActivity" />
-        <activity android:name=".SearchActivity"
+        <activity
+            android:name=".SearchActivity"
+            android:parentActivityName=".TimelineActivity" />
+        <activity
+            android:name=".ReplyActivity"
             android:parentActivityName=".TimelineActivity" />
     </application>
 
