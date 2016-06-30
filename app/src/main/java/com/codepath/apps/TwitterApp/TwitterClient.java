@@ -99,7 +99,7 @@ public class TwitterClient extends OAuthBaseClient {
 		getClient().get(apiUrl, params, handler);
 	}
 
-	public void likeTweet(String id, AsyncHttpResponseHandler handler) {
+	public void likeTweet(long id, AsyncHttpResponseHandler handler) {
 		String apiUrl = getApiUrl("favorites/create.json");
 		RequestParams params = new RequestParams();
 		params.put("id", id);
