@@ -36,12 +36,30 @@ public class Tweet {
         return mediaUrl;
     }
 
+    public boolean isFavorited() {
+        return favorited;
+    }
+
+    public void setFavorited(boolean favorited) {
+        this.favorited = favorited;
+    }
+
+    public boolean isRetweeted() {
+        return retweeted;
+    }
+
+    public void setRetweeted(boolean retweeted) {
+        this.retweeted = retweeted;
+    }
+
     // list out the attributes
     private String body;
     private long uid; // unique id for the tweet
     private User user; // store embedded user obj
     private String createdAt;
     private String mediaUrl;
+    private boolean favorited;
+    private boolean retweeted;
 
     // Deserialize the JSON and build tweet objects
     // Tweet.fromJSON("(...)") -> Tweet
@@ -54,9 +72,15 @@ public class Tweet {
             tweet.uid = jsonObject.getLong("id");
             tweet.createdAt = jsonObject.getString("created_at");
             tweet.user = User.fromJSON(jsonObject.getJSONObject("user"));
-            JSONArray media = jsonObject.getJSONObject("entities").getJSONArray("media");
-            JSONObject mediaObj = (JSONObject) media.get(0);
-            tweet.mediaUrl = mediaObj.optString("media_url");
+            JSONArray media = jsonObject.optJSONObject("entities").optJSONArray("media");
+            if (media != null) {
+                JSONObject mediaObj = (JSONObject) media.get(0);
+                tweet.mediaUrl = mediaObj.optString("media_url");
+            } else {
+                tweet.mediaUrl = null;
+            }
+            tweet.favorited = jsonObject.getBoolean("favorited");
+            tweet.retweeted = jsonObject.getBoolean("retweeted");
         } catch (JSONException e) {
             e.printStackTrace();
         }

@@ -19,7 +19,6 @@ import com.codepath.apps.TwitterApp.TwitterClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.squareup.picasso.Picasso;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.List;
@@ -56,12 +55,28 @@ public class TweetsArrayAdapter extends ArrayAdapter<Tweet> {
         TextView tvTimestamp = (TextView) convertView.findViewById(R.id.tvTimestamp);
         ImageView ivTweetPhoto = (ImageView) convertView.findViewById(R.id.ivTweetPhoto);
         final ImageView ivFavorite = (ImageView) convertView.findViewById(R.id.ivFavorite);
+        final ImageView ivRetweet = (ImageView) convertView.findViewById(R.id.ivRetweet);
 
+        // sets photos
         if (tweet.getMediaUrl() == null) {
             ivTweetPhoto.setVisibility(View.GONE);
         } else {
             ivTweetPhoto.setVisibility(View.VISIBLE);
 
+        }
+
+        // sets favorites
+        if (tweet.isFavorited()) {
+            ivFavorite.setColorFilter(Color.parseColor("#E81C4F"), PorterDuff.Mode.SRC_ATOP);
+        } else {
+            ivFavorite.setColorFilter(Color.parseColor("#AAB8C2"), PorterDuff.Mode.SRC_ATOP);
+        }
+
+        // sets retweets
+        if (tweet.isRetweeted()) {
+            ivRetweet.setColorFilter(Color.parseColor("#19CF86"), PorterDuff.Mode.SRC_ATOP);
+        } else {
+            ivRetweet.setColorFilter(Color.parseColor("#AAB8C2"), PorterDuff.Mode.SRC_ATOP);
         }
 
         // populate textViews
@@ -75,10 +90,38 @@ public class TweetsArrayAdapter extends ArrayAdapter<Tweet> {
             public void onClick(View v) {
                 client = TwitterApplication.getRestClient(); // singleton client
                 long tagId = (long) ivFavorite.getTag();
-                likeTweet(tagId);
-                ivFavorite.setColorFilter(Color.parseColor("#E81C4F"), PorterDuff.Mode.SRC_ATOP);
+                if (tweet.isFavorited()) {
+                    unLikeTweet(tagId);
+                    ivFavorite.setColorFilter(Color.parseColor("#AAB8C2"), PorterDuff.Mode.SRC_ATOP);
+                    tweet.setFavorited(false);
+                } else {
+                    likeTweet(tagId);
+                    ivFavorite.setColorFilter(Color.parseColor("#E81C4F"), PorterDuff.Mode.SRC_ATOP);
+                    tweet.setFavorited(true);
+                }
+
+
             }
         });
+
+        // populate retweets
+        ivRetweet.setTag(tweet.getUid());
+        ivRetweet.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                client = TwitterApplication.getRestClient(); // singleton client
+                long tagId = (long) ivRetweet.getTag();
+                if (tweet.isRetweeted()) {
+                    unretweet(tagId);
+                    ivRetweet.setColorFilter(Color.parseColor("#AAB8C2"), PorterDuff.Mode.SRC_ATOP);
+                    tweet.setRetweeted(false);
+                } else {
+                    retweet(tagId);
+                    ivRetweet.setColorFilter(Color.parseColor("#19CF86"), PorterDuff.Mode.SRC_ATOP);
+                    tweet.setRetweeted(true);
+                }
+            }
+        });
+
 
         // populate tweet photo
         Picasso.with(getContext()).load(tweet.getMediaUrl())
@@ -110,7 +153,7 @@ public class TweetsArrayAdapter extends ArrayAdapter<Tweet> {
         client.likeTweet(tagId, new JsonHttpResponseHandler() {
             // SUCCESS
             @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONArray json) {
+            public void onSuccess(int statusCode, Header[] headers, JSONObject json) {
                 Log.d("LIKE_TWEET", json.toString());
             }
 
@@ -118,6 +161,59 @@ public class TweetsArrayAdapter extends ArrayAdapter<Tweet> {
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                 Log.d("LIKE_TWEET", errorResponse.toString());
+            }
+        });
+
+    }
+
+
+    private void unLikeTweet(long tagId) {
+        client.unLikeTweet(tagId, new JsonHttpResponseHandler() {
+            // SUCCESS
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject json) {
+                Log.d("UNLIKE_TWEET", json.toString());
+            }
+
+            // FAILURE
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                Log.d("UNLIKE_TWEET", errorResponse.toString());
+            }
+        });
+
+    }
+
+    private void unretweet(long tagId) {
+        client.unretweetTweet(tagId, new JsonHttpResponseHandler() {
+            // SUCCESS
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject json) {
+                Log.d("UNRETWEET", json.toString());
+            }
+
+            // FAILURE
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                Log.d("UNRETWEET", errorResponse.toString());
+            }
+        });
+
+    }
+
+
+    private void retweet(long tagId) {
+        client.retweetTweet(tagId, new JsonHttpResponseHandler() {
+            // SUCCESS
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject json) {
+                Log.d("RETWEET", json.toString());
+            }
+
+            // FAILURE
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                Log.d("RETWEET", errorResponse.toString());
             }
         });
 
