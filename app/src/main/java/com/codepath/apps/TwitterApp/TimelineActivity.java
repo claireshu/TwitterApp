@@ -126,8 +126,8 @@ public class TimelineActivity extends AppCompatActivity {
     public void onSearchTweet(MenuItem mi) {
         Intent i = new Intent(this, SearchActivity.class);
         startActivity(i);
-
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {

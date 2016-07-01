@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -92,7 +93,11 @@ public class TweetsArrayAdapter extends ArrayAdapter<Tweet> {
 
         // populate textViews
         tvUserName.setText(tweet.getUser().getScreenName());
-        tvBody.setText(tweet.getBody());
+
+        // SET HTML?
+        String parsedText = parseText(tweet.getBody());
+        tvBody.setText(Html.fromHtml(parsedText));
+
         tvTimestamp.setText(ParseRelativeDate.getRelativeTimeAgo(tweet.getCreatedAt()));
 
         // populate likes
@@ -244,5 +249,33 @@ public class TweetsArrayAdapter extends ArrayAdapter<Tweet> {
                 Log.d("RETWEET", errorResponse.toString());
             }
         });
+    }
+
+    private String parseText(String text) {
+        String fStartTag = "<font color=#55ACEE>";
+        String fEndTag = "</font>";
+        String formattedText = "";
+        int startInsert = 0;
+        int endInsert = -1;
+
+        for (int i = 0; i < text.length(); i++) {
+            if (i < endInsert) {
+                continue;
+            }
+
+            if ((i < text.length() - 1) && (text.substring(i, i + 1).equals("@") || text.substring(i, i + 1).equals("#"))) {
+                startInsert = i;
+                endInsert = text.indexOf(" ", i);
+                if (endInsert == -1) {
+                    endInsert = text.length();
+                }
+                formattedText += fStartTag;
+                formattedText += text.substring(startInsert, endInsert);
+                formattedText += fEndTag;
+            } else {
+                formattedText += text.substring(i, i + 1);
+            }
+        }
+        return formattedText;
     }
 }

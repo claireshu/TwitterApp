@@ -13,18 +13,10 @@
         ></item>
 
     <item
-        android:id="@+id/miTweet"
+        android:id="@+id/miNotifications"
         app:showAsAction="always"
-        android:icon="@drawable/ic_compose_tinted"
-        android:title="Compose"
-        android:background="@color/twitterColor"
-        ></item>
-
-    <item
-        android:id="@+id/miSearch"
-        app:showAsAction="always"
-        android:icon="@drawable/ic_search_tinted"
-        android:title="Search"
+        android:icon="@drawable/ic_notification_tinted"
+        android:title="Notifications"
         android:background="@color/twitterColor"
         ></item>
 
@@ -38,12 +30,19 @@
         ></item>
 
     <item
-        android:id="@+id/miNotifications"
+        android:id="@+id/miSearch"
         app:showAsAction="always"
-        android:icon="@drawable/ic_notification_tinted"
-        android:title="Notifications"
+        android:icon="@drawable/ic_search_tinted"
+        android:title="Search"
         android:background="@color/twitterColor"
         ></item>
 
+    <item
+        android:id="@+id/miTweet"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_compose_tinted"
+        android:title="Compose"
+        android:background="@color/twitterColor"
+        ></item>
 
 </menu>

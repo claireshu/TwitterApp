@@ -58,8 +58,8 @@ public class ProfileActivity extends AppCompatActivity {
         ImageView ivProfileImage = (ImageView) findViewById(R.id.ivProfileImage);
         tvName.setText(user.getName());
         tvTagline.setText(user.getTagline());
-        tvFollowers.setText(user.getFollowersCount() + "Followers");
-        tvFollowing.setText(user.getFriendsCount() + "Following");
+        tvFollowers.setText(user.getFollowersCount() + " Followers");
+        tvFollowing.setText(user.getFriendsCount() + " Following");
         Glide.with(this).load(user.getProfileImageUrl())
                 .bitmapTransform(new RoundedCornersTransformation(getApplicationContext(), 4, 4))
                 .into(ivProfileImage);
