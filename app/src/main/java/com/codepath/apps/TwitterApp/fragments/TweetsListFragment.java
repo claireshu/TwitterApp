@@ -72,9 +72,6 @@ public class TweetsListFragment extends Fragment {
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
-
-
-
     }
 
     public void fetchTimelineAsync(int page) {
@@ -105,6 +102,8 @@ public class TweetsListFragment extends Fragment {
     }
 
     public void addTweetStart(Tweet tweet) {
+//        tweet.setFavoriteCount(0);
+//        tweet.setRetweetCount(0);
         tweets.add(0, tweet);
         aTweets.notifyDataSetChanged();
         // add to beginning

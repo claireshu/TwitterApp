@@ -60,6 +60,14 @@ public class Tweet {
         return retweetCount;
     }
 
+    public void setFavoriteCount(int favoriteCount) {
+        this.favoriteCount = favoriteCount;
+    }
+
+    public void setRetweetCount(int retweetCount) {
+        this.retweetCount = retweetCount;
+    }
+
     // list out the attributes
     private String body;
     private long uid; // unique id for the tweet
@@ -68,6 +76,8 @@ public class Tweet {
     private String mediaUrl;
     private boolean favorited;
     private boolean retweeted;
+
+
     private int favoriteCount;
     private int retweetCount;
 

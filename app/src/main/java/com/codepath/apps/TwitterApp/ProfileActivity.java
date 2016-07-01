@@ -47,7 +47,6 @@ public class ProfileActivity extends AppCompatActivity {
             ft.replace(R.id.flContainer, fragmentUserTimeline);
             ft.commit();
         }
-
     }
 
     private void populateProfileHeader(User user) {
@@ -56,15 +55,19 @@ public class ProfileActivity extends AppCompatActivity {
         TextView tvFollowers = (TextView) findViewById(R.id.tvFollowers);
         TextView tvFollowing = (TextView) findViewById(R.id.tvFollowing);
         ImageView ivProfileImage = (ImageView) findViewById(R.id.ivProfileImage);
+        
         tvName.setText(user.getName());
         tvTagline.setText(user.getTagline());
-        tvFollowers.setText(user.getFollowersCount() + " Followers");
-        tvFollowing.setText(user.getFriendsCount() + " Following");
+
+        String followersCount = condenseCounts(user.getFollowersCount());
+        String friendsCount = condenseCounts(user.getFriendsCount());
+
+        tvFollowers.setText(followersCount + " Followers");
+        tvFollowing.setText(friendsCount + " Following");
+
         Glide.with(this).load(user.getProfileImageUrl())
                 .bitmapTransform(new RoundedCornersTransformation(getApplicationContext(), 4, 4))
                 .into(ivProfileImage);
-
-
     }
 
     @Override
@@ -75,8 +78,16 @@ public class ProfileActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
         return super.onOptionsItemSelected(item);
+    }
+
+    private String condenseCounts(int count) {
+        if (count > 1000) {
+            return Integer.toString(count / 1000) + "K";
+        } else if (count > 1000000) {
+            return Integer.toString(count / 1000000) + "M";
+        } else {
+            return Integer.toString(count);
+        }
     }
 }

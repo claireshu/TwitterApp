@@ -61,6 +61,7 @@ public class ComposeActivity extends AppCompatActivity {
                     tvCharCount.setTextColor( Color.parseColor("#E54648"));
                     btnTweet.setEnabled(false);
                 } else {
+                    tvCharCount.setTextColor( Color.parseColor("#AAB8C2"));
                     btnTweet.setEnabled(true);
                 }
             }

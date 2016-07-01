@@ -72,10 +72,15 @@ public class TweetsArrayAdapter extends ArrayAdapter<Tweet> {
         // sets favorites and retweet counts
         if (tweet.getFavoriteCount() != 0) {
             tvFavoritesCount.setText(Integer.toString(tweet.getFavoriteCount()));
+        } else {
+            tvFavoritesCount.setText("");
+
         }
 
         if (tweet.getRetweetCount() != 0) {
             tvRetweetCount.setText(Integer.toString(tweet.getRetweetCount()));
+        } else {
+            tvRetweetCount.setText("");
         }
 
         // sets favorites
