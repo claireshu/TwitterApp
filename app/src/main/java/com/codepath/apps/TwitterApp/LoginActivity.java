@@ -1,9 +1,13 @@
 package com.codepath.apps.TwitterApp;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.view.WindowManager;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.codepath.oauth.OAuthLoginActionBarActivity;
@@ -14,7 +18,13 @@ public class LoginActivity extends OAuthLoginActionBarActivity<TwitterClient> {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
-	}
+		Typeface font = Typeface.createFromAsset(getAssets(), "fonts/sourcessans.otf");
+		TextView tvWelcome = (TextView) findViewById(R.id.tvWelcome);
+		TextView tvWelcomeIntro = (TextView) findViewById(R.id.tvWelcomeIntro);
+		tvWelcome.setTypeface(font);
+		tvWelcomeIntro.setTypeface(font);
+		setStatusBarColor();
+}
 
 
 	// Inflate the menu; this adds items to the action bar if it is present.
@@ -47,4 +57,11 @@ public class LoginActivity extends OAuthLoginActionBarActivity<TwitterClient> {
 		getClient().connect();
 	}
 
+
+	private void setStatusBarColor() {
+		this.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+		getWindow().setStatusBarColor(Color.parseColor("#000000"));
+		getWindow().setNavigationBarColor(Color.parseColor("#000000"));
+
+	}
 }
