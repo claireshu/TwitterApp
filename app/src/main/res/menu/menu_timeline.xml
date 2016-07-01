@@ -8,41 +8,35 @@
         app:showAsAction="always"
         android:icon="@drawable/ic_profile"
         android:title="Profile"
-        android:background="#ff0000"
-
         ></item>
 
     <item
         android:id="@+id/miNotifications"
         app:showAsAction="always"
-        android:icon="@drawable/ic_notification_tinted"
+        android:icon="@drawable/ic_notification"
         android:title="Notifications"
-        android:background="@color/twitterColor"
         ></item>
 
 
     <item
         android:id="@+id/miMessages"
         app:showAsAction="always"
-        android:icon="@drawable/ic_messages_tinted"
+        android:icon="@drawable/ic_messages"
         android:title="Messages"
-        android:background="@color/twitterColor"
         ></item>
 
     <item
         android:id="@+id/miSearch"
         app:showAsAction="always"
-        android:icon="@drawable/ic_search_tinted"
+        android:icon="@drawable/ic_search"
         android:title="Search"
-        android:background="@color/twitterColor"
         ></item>
 
     <item
         android:id="@+id/miTweet"
         app:showAsAction="always"
-        android:icon="@drawable/ic_compose_tinted"
+        android:icon="@drawable/ic_compose"
         android:title="Compose"
-        android:background="@color/twitterColor"
         ></item>
 
 </menu>

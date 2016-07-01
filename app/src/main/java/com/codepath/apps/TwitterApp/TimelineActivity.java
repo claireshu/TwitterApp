@@ -1,9 +1,6 @@
 package com.codepath.apps.TwitterApp;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -46,16 +43,6 @@ public class TimelineActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_timeline, menu);
-
-        for(int i = 0; i < menu.size(); i++){
-            Drawable drawable = menu.getItem(i).getIcon();
-            if(drawable != null) {
-                drawable.mutate();
-                //drawable.setColorFilter(Color.parseColor("#55ACEE"), PorterDuff.Mode.SRC_ATOP);
-                drawable.setColorFilter(Color.parseColor("#55ACEE"), PorterDuff.Mode.SRC_IN);
-
-            }
-        }
         return true;
     }
 
