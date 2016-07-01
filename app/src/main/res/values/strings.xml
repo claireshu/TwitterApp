@@ -2,7 +2,8 @@
 <resources>
 
     <string name="app_name">Twitter</string>
-    <string name="login_label">Connect to Twitter</string>
+    <string name="signup_label">Sign up</string>
+    <string name="login_label">Login</string>
     <string name="title_activity_profile">ProfileActivity</string>
     <string name="tweet_hint">What\'s happening?</string>
     <string name="search">Search Twitter</string>

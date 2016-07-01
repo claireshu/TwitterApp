@@ -272,6 +272,15 @@ public class TweetsArrayAdapter extends ArrayAdapter<Tweet> {
                 formattedText += fStartTag;
                 formattedText += text.substring(startInsert, endInsert);
                 formattedText += fEndTag;
+            } else if ((i < text.length() - 4) && (text.substring(i, i + 4).equals("http"))) {
+                startInsert = i;
+                endInsert = text.indexOf(" ", i);
+                if (endInsert == -1) {
+                    endInsert = text.length();
+                }
+                formattedText += fStartTag;
+                formattedText += text.substring(startInsert, endInsert);
+                formattedText += fEndTag;
             } else {
                 formattedText += text.substring(i, i + 1);
             }
