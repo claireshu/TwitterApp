@@ -54,6 +54,7 @@ public class TweetsArrayAdapter extends ArrayAdapter<Tweet> {
         TextView tvBody = (TextView) convertView.findViewById(R.id.tvBody);
         TextView tvTimestamp = (TextView) convertView.findViewById(R.id.tvTimestamp);
         ImageView ivTweetPhoto = (ImageView) convertView.findViewById(R.id.ivTweetPhoto);
+        TextView tvTwitterName = (TextView) convertView.findViewById(R.id.tvTwitterName);
         final ImageView ivFavorite = (ImageView) convertView.findViewById(R.id.ivFavorite);
         final ImageView ivRetweet = (ImageView) convertView.findViewById(R.id.ivRetweet);
         final ImageView ivReply = (ImageView) convertView.findViewById(R.id.ivReply);
@@ -80,19 +81,25 @@ public class TweetsArrayAdapter extends ArrayAdapter<Tweet> {
         // sets favorites
         if (tweet.isFavorited()) {
             ivFavorite.setColorFilter(Color.parseColor("#E81C4F"), PorterDuff.Mode.SRC_ATOP);
+            tvFavoritesCount.setTextColor(Color.parseColor("#E81C4F"));
         } else {
             ivFavorite.setColorFilter(Color.parseColor("#AAB8C2"), PorterDuff.Mode.SRC_ATOP);
+            tvFavoritesCount.setTextColor(Color.parseColor("#AAB8C2"));
+
         }
 
         // sets retweets
         if (tweet.isRetweeted()) {
             ivRetweet.setColorFilter(Color.parseColor("#19CF86"), PorterDuff.Mode.SRC_ATOP);
+            tvRetweetCount.setTextColor(Color.parseColor("#19CF86"));
         } else {
             ivRetweet.setColorFilter(Color.parseColor("#AAB8C2"), PorterDuff.Mode.SRC_ATOP);
+            tvRetweetCount.setTextColor(Color.parseColor("#AAB8C2"));
         }
 
         // populate textViews
-        tvUserName.setText(tweet.getUser().getScreenName());
+        tvUserName.setText(tweet.getUser().getName());
+        tvTwitterName.setText("@" + tweet.getUser().getScreenName());
 
         // SET HTML?
         String parsedText = parseText(tweet.getBody());
@@ -112,12 +119,14 @@ public class TweetsArrayAdapter extends ArrayAdapter<Tweet> {
                     tweet.setFavorited(false);
                     int curr_count = Integer.parseInt((String) tvFavoritesCount.getText());
                     tvFavoritesCount.setText(Integer.toString(curr_count - 1));
+                    tvFavoritesCount.setTextColor(Color.parseColor("#AAB8C2"));
                 } else {
                     likeTweet(tagId);
                     ivFavorite.setColorFilter(Color.parseColor("#E81C4F"), PorterDuff.Mode.SRC_ATOP);
                     tweet.setFavorited(true);
                     int curr_count = Integer.parseInt((String) tvFavoritesCount.getText());
                     tvFavoritesCount.setText(Integer.toString(curr_count + 1));
+                    tvFavoritesCount.setTextColor(Color.parseColor("#E81C4F"));
                 }
             }
         });
@@ -134,6 +143,8 @@ public class TweetsArrayAdapter extends ArrayAdapter<Tweet> {
                     tweet.setRetweeted(false);
                     int curr_count = Integer.parseInt((String) tvRetweetCount.getText());
                     tvRetweetCount.setText(Integer.toString(curr_count - 1));
+                    tvRetweetCount.setTextColor(Color.parseColor("#AAB8C2"));
+
 
                 } else {
                     retweet(tagId);
@@ -141,6 +152,7 @@ public class TweetsArrayAdapter extends ArrayAdapter<Tweet> {
                     tweet.setRetweeted(true);
                     int curr_count = Integer.parseInt((String) tvRetweetCount.getText());
                     tvRetweetCount.setText(Integer.toString(curr_count + 1));
+                    tvRetweetCount.setTextColor(Color.parseColor("#19CF86"));
                 }
             }
         });

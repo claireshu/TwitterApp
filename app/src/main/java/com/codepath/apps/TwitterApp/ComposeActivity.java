@@ -14,7 +14,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.codepath.apps.TwitterApp.models.Tweet;
@@ -111,7 +110,7 @@ public class ComposeActivity extends AppCompatActivity {
         client.postUserTweet(tweet, 0L, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                Toast.makeText(getApplicationContext(), "Tweet Posted", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), "Tweet Posted", Toast.LENGTH_SHORT).show();
                 newTweet = Tweet.fromJSON(response);
                 Intent i = new Intent();
                 i.putExtra("tweet", Parcels.wrap(newTweet));

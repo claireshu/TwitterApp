@@ -101,18 +101,6 @@ public class Tweet {
         return tweet;
     }
 
-//    public static Tweet createTweet(String body, String createdAt, String user) {
-//        Tweet tweet = new Tweet();
-//
-//        tweet.body = body;
-//        tweet.createdAt = createdAt;
-//        tweet.userName = user;
-//
-//        // return the tweet object
-//        return tweet;
-//
-//    }
-
     //Tweet.fromJSONArray([{...}, {..}]) -> List<Tweet>
     public static ArrayList<Tweet> fromJSONArray(JSONArray jsonArray) {
         ArrayList<Tweet> tweets = new ArrayList<>();

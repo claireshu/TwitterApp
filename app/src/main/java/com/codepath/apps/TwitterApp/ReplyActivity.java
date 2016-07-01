@@ -2,9 +2,9 @@ package com.codepath.apps.TwitterApp;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
@@ -14,7 +14,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.codepath.apps.TwitterApp.models.Tweet;
@@ -119,7 +118,7 @@ public class ReplyActivity extends AppCompatActivity {
         client.postUserTweet(tweet, tagId, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                Toast.makeText(getApplicationContext(), "Tweet Reply Posted", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), "Tweet Reply Posted", Toast.LENGTH_SHORT).show();
                 newTweet = Tweet.fromJSON(response);
                 Intent i = new Intent();
                 i.putExtra("tweet", Parcels.wrap(newTweet));
