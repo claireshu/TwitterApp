@@ -53,7 +53,7 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-[SimpleTwitter GIF](SimpleTwitter_GIF.gif)
+[SimpleTwitter GIF](SimpleTwitter GIF.gif)
 
 ## Open-source libraries used
 
